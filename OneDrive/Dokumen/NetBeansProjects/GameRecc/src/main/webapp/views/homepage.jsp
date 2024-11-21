@@ -2,6 +2,7 @@
     Document   : homepage
     Created on : 20 Nov 2024, 20.17.47
     Author     : Victus
+    okkk
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
