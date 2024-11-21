@@ -27,7 +27,7 @@ public class GameDao {
     
     private final String url = "jdbc:mysql://localhost:3306/mydb";
     private final String dbUser = "root";
-    private final String dbPassword = "ridho";
+    private final String dbPassword = "@Faizhkl06";
 
     // Method to add a new movie
     public boolean addMovie(String name,String genre,String device,double Price,int age,double rating,java.util.Date Date,String PosterGame) throws SQLException {
@@ -55,7 +55,7 @@ public class GameDao {
             
             
 
-            return stmt.executeUpdate() > 0; // Returns true if insertion was successful
+            return stmt.executeUpdate() > 0; 
         }
     }
 
@@ -63,7 +63,7 @@ public class GameDao {
     
     
     
-    // Method to update an existing movie
+    
     public boolean updateMovie(int GameID,String name,String genre,String device,double Price,int age,double rating,java.util.Date Date,String PosterGame) throws SQLException {
         String sql = "UPDATE game SET Name=?, Genre=?, Device =?,Price =? ,Age=?,Rating=?,Date=?,PosterGame=? WHERE movieID = ?";
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);

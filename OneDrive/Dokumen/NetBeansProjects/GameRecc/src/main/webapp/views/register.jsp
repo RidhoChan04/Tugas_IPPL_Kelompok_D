@@ -131,11 +131,15 @@
     </div>
     <div class="form-section">
       <h2>Sign Up</h2>
-      <p>Existing User? <a href="#">Log in</a></p>
-      <input type="text" placeholder="&#xf007; Username" style="font-family: Arial, FontAwesome;">
-      <input type="password" placeholder="&#xf023; Password" style="font-family: Arial, FontAwesome;">
+      <form action="/User" method="post">
+      <input type="hidden" name="action" value="register">
+      
+      <input type="text" name="username" placeholder="&#xf007; Username" style="font-family: Arial, FontAwesome;">
+      <input type="password" name="password" placeholder="&#xf023; Password" style="font-family: Arial, FontAwesome;">
       <button>Sign Up</button>
+      </form>
       <p class="small-link">Not admin yet? <span>Request Access</span></p>
+      <p>Existing User? <a href="#">Log in</a></p>
     </div>
   </div>
 </body>

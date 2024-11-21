@@ -25,7 +25,7 @@ import model.User;
 public class UserDao {
   private final String url ="jdbc:mysql://localhost:3306/mydb";
     private final String user = "root";
-    private final String pasword = "ridho";
+    private final String pasword = "@Faizhkl06";
     public UserDao(){};
     
     

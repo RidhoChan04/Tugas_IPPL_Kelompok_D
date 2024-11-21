@@ -122,7 +122,7 @@
       <input type="password" name="password" placeholder="&#xf023; Password" style="font-family: Arial, FontAwesome;">
       <button>Login</button>
       </form>
-      <a href="#">No account yet? <span style="text-decoration: underline;">Register</span></a>
+      <a href="/views/register.jsp">No account yet? <span style="text-decoration: underline;">Register</span></a>
     </div>
   </div>
 </body>

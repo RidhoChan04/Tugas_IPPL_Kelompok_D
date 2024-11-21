@@ -62,18 +62,9 @@ public class MainController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
 
-    
-        handleSignIn(request, response);
-    
 }
     
-    private void handleSignIn(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    String username = request.getParameter("username");
-    String password = request.getParameter("password");
-
-    response.getWriter().print(username);
-    response.getWriter().print(password);
-}
+   
 
 
 }
