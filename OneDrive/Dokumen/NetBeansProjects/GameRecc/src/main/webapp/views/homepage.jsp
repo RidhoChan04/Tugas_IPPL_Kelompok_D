@@ -6,7 +6,6 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -22,7 +21,8 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
+      min-height: 100vh;
     }
 
     .header {
@@ -31,7 +31,8 @@
       align-items: center;
       width: 90%;
       max-width: 1200px;
-      margin-top: 20px;
+      padding: 20px 0;
+      border-bottom: 2px solid #749aa8;
     }
 
     .header .logo {
@@ -45,10 +46,17 @@
       height: 50px;
     }
 
+    .header h2 {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #8bc8bd;
+      margin: 0;
+    }
+
     .header .search {
       background-color: #0056b3;
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       border-radius: 50%;
       display: flex;
       justify-content: center;
@@ -57,62 +65,87 @@
     }
 
     .header .search img {
-      width: 20px;
-      height: 20px;
+      width: 25px;
+      height: 25px;
     }
 
     .main-content {
       width: 90%;
       max-width: 1200px;
-      margin-top: 20px;
+      margin-top: 30px;
     }
 
     .sort-button {
       background-color: #28a745;
       color: white;
-      padding: 10px 20px;
+      padding: 12px 25px;
       border: none;
       border-radius: 5px;
       cursor: pointer;
       font-size: 1rem;
+      font-weight: bold;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      display: inline-block;
       margin-bottom: 20px;
-      transition: background-color 0.3s ease;
     }
 
     .sort-button:hover {
       background-color: #218838;
+      transform: translateY(-2px);
     }
 
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
+      padding-bottom: 20px;
     }
 
     .game-card {
       background-color: #1c3b4d;
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .game-card img {
-      width: 100%;
-      height: 150px;
-      object-fit: cover;
+      text-align: center;
     }
 
     .game-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .game-card img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
     }
 
     .game-card-title {
+      padding: 15px;
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: white;
+    }
+
+    footer {
+      margin-top: 20px;
       padding: 10px;
       text-align: center;
-      font-size: 1rem;
+      background-color: #00334d;
+      width: 100%;
       color: white;
+      font-size: 0.9rem;
+      border-top: 2px solid #749aa8;
+    }
+
+    footer a {
+      color: #8bc8bd;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -123,38 +156,42 @@
       <h2>GameRecce</h2>
     </div>
     <div class="search">
-      <img src="https://via.placeholder.com/20" alt="Search Icon">
+      <img src="https://via.placeholder.com/25" alt="Search Icon">
     </div>
   </div>
   <div class="main-content">
     <button class="sort-button">Sorting Game</button>
     <div class="game-grid">
       <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
+        <img src="https://via.placeholder.com/250x160" alt="Game Image">
         <div class="game-card-title">Black Myth: Wukong</div>
       </div>
       <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
+        <img src="https://via.placeholder.com/250x160" alt="Game Image">
         <div class="game-card-title">Harvest Moon</div>
       </div>
       <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
+        <img src="https://via.placeholder.com/250x160" alt="Game Image">
         <div class="game-card-title">Counter-Strike</div>
       </div>
       <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
+        <img src="https://via.placeholder.com/250x160" alt="Game Image">
         <div class="game-card-title">NBA 2K25</div>
       </div>
       <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
+        <img src="https://via.placeholder.com/250x160" alt="Game Image">
         <div class="game-card-title">Dragon Ball</div>
       </div>
       <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
+        <img src="https://via.placeholder.com/250x160" alt="Game Image">
         <div class="game-card-title">MechWarrior</div>
       </div>
     </div>
   </div>
+  <footer>
+    &copy; 2024 GameRecce. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+  </footer>
 </body>
 </html>
+
 
