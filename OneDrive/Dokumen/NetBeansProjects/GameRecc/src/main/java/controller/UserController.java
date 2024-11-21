@@ -59,6 +59,10 @@ public class UserController extends HttpServlet{
         if(action.equals("register")){
             handleRegister(request,response);
         }else if(action.equals("login")){
+            String username = request.getParameter("username");
+            String password = request.getParameter("password");
+            User user=userDao.selectUser(username, password);
+            request.getSession().setAttribute("user", user);
             handleLogin(request,response);
         }
         
@@ -85,9 +89,11 @@ public class UserController extends HttpServlet{
         String password=request.getParameter("password");
         
        boolean cekValidasiUser=userDao.validateUser(username, password);
-       
+       boolean cekValidasiAdmin=userDao.validateAdmin(username, password);
        if(cekValidasiUser){
-           response.sendRedirect("/Game?action=displayGame");
+           response.sendRedirect("/Game?action=home");
+       }else if(cekValidasiAdmin){
+           response.sendRedirect("/views/adminpage.jsp");
        }
         
         

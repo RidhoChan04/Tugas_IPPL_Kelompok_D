@@ -1,22 +1,27 @@
 <%-- 
-    Document   : menghapusgame
-    Created on : 21 Nov 2024, 16.57.27
+    Document   : mengubahGame
+    Created on : 22 Nov 2024, 00.36.24
     Author     : Victus
 --%>
 
+<%@page import="model.review"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Game"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Menghapus Game</title>
+  <title>Mengedit Game</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-color: #002b40;
+      background:url("bckground_figma.jpg");
+      background-size: cover;
       color: white;
       display: flex;
       justify-content: center;
@@ -55,15 +60,29 @@
       margin-bottom: 5px;
     }
 
-    input {
+    input, textarea {
       width: 100%;
       padding: 10px;
       border: none;
       border-radius: 5px;
       outline: none;
       font-size: 1rem;
-      background-color: #749aa8;
-      color: white;
+      background-color: #ffffff8a;
+      color: rgb(0, 0, 0);
+    }
+
+    input[type="file"] {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+
+    .upload-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
     button {
@@ -131,25 +150,54 @@
   </style>
 </head>
 <body>
+    <% Game game=(Game) request.getSession().getAttribute("Game"); 
+       List<review>reviews=game.getReviews();
+    
+    
+    %>
   <div class="container">
-    <h1>Menghapus Game</h1>
+    <h1>Mengubah Game</h1>
     <form id="gameForm"  action="/Game" method="post" enctype="multipart/form-data">
-     <input type="hidden" name="action" value="deleteGame">   
-      <label for="name">Nama:</label>
-      <input type="text" id="name" name="name" placeholder="Masukkan nama game" required>
-      <label for="genre">Genre:</label>
-      <input type="text" id="genre" name="genre" placeholder="Masukkan genre game" required>
-      <button type="submit">Hapus</button>
+     <input type="hidden" name="action" value="editGame">
+     <input type="hidden" name="id" value="<%= game.getGameID() %>">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder=<%=game.getName() %> required>
+
+      <label for="genre">Genre</label>
+      <input type="text" id="genre" name="genre" placeholder=<%=game.getGenre() %> required>
+
+      <label for="genre">Tanggal Rilis</label>
+      <input type="date" id="date" name="date" placeholder=<%= game.getDate() %> required>
+
+      <label for="device">Device</label>
+      <input type="text" id="device" name="device" placeholder=<%= game.getDevice() %> required>
+
+      <label for="price">Price</label>
+      <input type="text" id="price" name="price" placeholder=<%= game.getPrice() %> required>
+
+      <label for="age">Age</label>
+      <input type="text" id="age" name="age" placeholder=<%= game.getAge() %> required>
+
+      <label for="description">Deskripsi:</label>
+      <textarea id="description" name="description" rows="4" placeholder=<%= game.getDeskripsi() %> required></textarea>
+
+      <div class="upload-container">
+        <label for="image">Upload Foto:</label>
+        <input type="file" id="image" name="poster" accept="image/*" required>
+      </div>
+
+      <button type="submit">Edit Game</button>
     </form>
     <div class="notification" id="notification">
-      Game berhasil dihapus!
+      Edit Berhasil!
     </div>
   </div>
 
   <a href="/admin-menu" class="back-button">&#8630;</a>
 
-  
 </body>
 </html>
+
+
 
 

@@ -17,17 +17,17 @@ public class ReviewDao {
 
    private final String url = "jdbc:mysql://localhost:3306/mydb";
     private final String dbUser = "root";
-    private final String dbPassword = "@Faizhkl06";
+    private final String dbPassword = "ridho";
 
     // Method to add a review
     public boolean addReview(int gameID, int userID, double rating, String comment) {
-        String query = "INSERT INTO reviews (User_userID, Game_GameID, Komen, Rating) VALUES (?, ?, ?, ?)";
+        String query = "INSERT INTO review (User_userID, Game_GameID, Komen, Rating) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setInt(1, gameID);
-            stmt.setInt(2, userID);
+            stmt.setInt(1, userID);
+            stmt.setInt(2, gameID);
             stmt.setString(3, comment);
             stmt.setDouble(4, rating);
             
@@ -43,7 +43,7 @@ public class ReviewDao {
     // Method to retrieve reviews for a specific movie
     public List<review> getReviewsByGameID(int GameID) {
         List<review> reviews = new ArrayList<>();
-        String query = "SELECT * FROM reviews WHERE Game_GameID = ? ORDER BY Rating DESC";
+        String query = "SELECT * FROM review WHERE Game_GameID = ? ORDER BY Rating DESC";
 
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(query)) {
@@ -54,8 +54,8 @@ public class ReviewDao {
             while (rs.next()) {
                 review review = new review(
                     rs.getInt("ReviewID"),
-                    rs.getString("comment"),
-                    rs.getDouble("rating"));
+                    rs.getString("Komen"),
+                    rs.getDouble("Rating"));
                 reviews.add(review);
             }
 

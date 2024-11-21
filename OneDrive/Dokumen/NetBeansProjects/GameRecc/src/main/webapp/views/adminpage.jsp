@@ -65,9 +65,9 @@
   <div class="container">
     <h1>Main Menu Admin</h1>
     <div class="menu-buttons">
-      <button onclick="window.location.href='add-game.html'">Menambah Game</button>
-      <button onclick="window.location.href='delete-game.html'">Menghapus Game</button>
-      <button onclick="window.location.href='edit-game.html'">Mengubah Data Game</button>
+      <button onclick="window.location.href='/views/menambahgame.jsp'">Menambah Game</button>
+      <button onclick="window.location.href='/views/menghapusgame.jsp'">Menghapus Game</button>
+      <button onclick="window.location.href='/Game?action=homeadmin'">Mengubah Data Game</button>
     </div>
   </div>
 </body>

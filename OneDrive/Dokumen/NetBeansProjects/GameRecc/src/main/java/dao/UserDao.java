@@ -25,13 +25,13 @@ import model.User;
 public class UserDao {
   private final String url ="jdbc:mysql://localhost:3306/mydb";
     private final String user = "root";
-    private final String pasword = "@Faizhkl06";
+    private final String pasword = "ridho";
     public UserDao(){};
     
     
     
     public boolean editUser(int id,String username, String fullName, String description,String pictureUrl){
-         String query ="update user set username=?, fullname=?,description=?,profile_picture_url=? where UserID=?";
+         String query ="update user set username=?, fullname=?, description=?,profile_picture_url=? where UserID=?";
          try{
              Class.forName("com.mysql.cj.jdbc.Driver");
          }catch(ClassNotFoundException e){
@@ -159,7 +159,7 @@ public class UserDao {
           }
         try (Connection conn = DriverManager.getConnection(url, user, pasword);
              PreparedStatement statement = conn.prepareStatement(query)) {
-
+            
             statement.setString(1, username);
             statement.setString(2, password);
             statement.setString(3, "1");
@@ -202,10 +202,11 @@ public class UserDao {
             int userID = resultSet.getInt("userID"); // Retrieve userID
             String dbUsername = resultSet.getString("username");
             String dbPassword = resultSet.getString("password");
-            String fullname = resultSet.getString("fullname");
+            
            
             // Create a User object with userID, username, password, and fullname
             userr = new User(dbUsername, dbPassword);
+            userr.setUserID(userID);
             
         }
 
@@ -258,7 +259,7 @@ public class UserDao {
 }  
     
     public List<String> getHighlyRatedGenres(int userID, float ratingThreshold) throws SQLException {
-    String query = "SELECT DISTINCT m.genre FROM reviews r " +
+    String query = "SELECT DISTINCT m.genre FROM review r " +
                    "JOIN movies m ON r.Movies_movieID = m.movieID " +
                    "WHERE r.Users_UserID = ? AND r.rating > ?";
     List<String> genres = new ArrayList<>();

@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +17,8 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-color: #002b40;
+      background:url("bckground_figma.jpg");
+      background-size: cover;
       color: white;
       display: flex;
       justify-content: center;
@@ -62,8 +64,8 @@
       border-radius: 5px;
       outline: none;
       font-size: 1rem;
-      background-color: #749aa8;
-      color: white;
+      background-color: #ffffff8a;
+      color: rgb(0, 0, 0);
     }
 
     input[type="file"] {
@@ -147,28 +149,32 @@
 <body>
   <div class="container">
     <h1>Menambah Game</h1>
-    <form id="gameForm">
-      <label for="name">Nama:</label>
-      <input type="text" id="name" name="name" placeholder="Masukkan nama game" required>
+    <form id="gameForm"  action="/Game" method="post" enctype="multipart/form-data">
+     <input type="hidden" name="action" value="addGame">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Nama Game" required>
 
-      <label for="genre">Genre:</label>
-      <input type="text" id="genre" name="genre" placeholder="Masukkan genre game" required>
+      <label for="genre">Genre</label>
+      <input type="text" id="genre" name="genre" placeholder="Genre" required>
 
-      <label for="device">Device:</label>
-      <input type="text" id="device" name="device" placeholder="Masukkan perangkat game" required>
+      <label for="tanggal-rilis">Tanggal Rilis</label>
+      <input type="date" id="tanggal_rilis" name="date" placeholder="Tanggal Rilis" required>
 
-      <label for="price">Harga:</label>
-      <input type="text" id="price" name="price" placeholder="Masukkan harga game" required>
+      <label for="device">Device</label>
+      <input type="text" id="device" name="device" placeholder="Device Game" required>
 
-      <label for="age">Umur:</label>
+      <label for="price">Price</label>
+      <input type="text" id="price" name="price" placeholder="Harga Game" required>
+
+      <label for="age">Age</label>
       <input type="text" id="age" name="age" placeholder="Batas umur game" required>
 
       <label for="description">Deskripsi:</label>
-      <textarea id="description" name="description" rows="4" placeholder="Masukkan deskripsi game" required></textarea>
+      <textarea id="description" name="description" rows="4" placeholder="bla bla bla" required></textarea>
 
       <div class="upload-container">
         <label for="image">Upload Foto:</label>
-        <input type="file" id="image" name="image" accept="image/*" required>
+        <input type="file" id="image" name="poster" accept="image/*" required>
       </div>
 
       <button type="submit">Tambahkan</button>
@@ -180,27 +186,7 @@
 
   <a href="/admin-menu" class="back-button">&#8630;</a>
 
-  <script>
-    // Get the form and notification elements
-    const form = document.getElementById('gameForm');
-    const notification = document.getElementById('notification');
-
-    // Add an event listener to the form
-    form.addEventListener('submit', function(event) {
-      event.preventDefault(); // Prevent actual form submission
-
-      // Show the notification
-      notification.classList.add('show');
-
-      // Hide the notification after 3 seconds
-      setTimeout(() => {
-        notification.classList.remove('show');
-      }, 3000);
-
-      // Optionally, clear the form fields
-      form.reset();
-    });
-  </script>
+  
 </body>
 </html>
 

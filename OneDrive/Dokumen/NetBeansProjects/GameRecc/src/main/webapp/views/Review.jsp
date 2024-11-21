@@ -4,6 +4,10 @@
     Author     : Victus
 --%>
 
+<%@page import="model.User"%>
+<%@page import="model.review"%>
+<%@page import="java.util.List"%>
+<%@page import="model.Game"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,21 +17,41 @@
   <title>Game Review - Harvest Moon</title>
   <style>
     body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      background-color: #002b40;
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      min-height: 100vh;
-    }
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #002b40;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            position: relative;
+        }
+        .gambar-latar {
+            position: fixed; /* Membuat gambar tetap saat di-scroll */
+            top: 0;
+            left: 0;
+            width: 100%; /* Membuat gambar memenuhi layar */
+            height: 100%; /* Membuat gambar memenuhi layar */
+            background-image: url('Group_8.png');
+            background-size: cover; /* Mengatur gambar agar menutupi seluruh area */
+            background-position: center; /* Posisikan gambar di tengah */
+            z-index: -1; /* Menempatkan gambar di belakang konten */
+            opacity: 0.7; /* Membuat gambar agak transparan agar tidak terlalu dominan */
+        }
+
+        .content {
+            position: relative; /* Memastikan konten berada di atas gambar */
+            z-index: 1; /* Memastikan konten di atas gambar */
+            padding: 20px;
+            text-align: center;
+        }
 
     .container {
       width: 90%;
       max-width: 1200px;
-      background-color: #e0e0e0;
+      background-color: #e0e0e000;
       border-radius: 15px;
       padding: 20px;
       margin: 20px;
@@ -51,7 +75,7 @@
 
     .header h1 {
       margin: 0;
-      color: #ffffff;
+      color: white;
       font-size: 2rem;
       margin-bottom: 10px;
     }
@@ -165,48 +189,61 @@
   </style>
 </head>
 <body>
+    <% Game game=(Game) request.getSession().getAttribute("singleGame"); 
+       List<review>reviews=game.getReviews();
+       User user= (User) request.getSession().getAttribute("user");
+    
+    
+    %>
   <div class="container">
     <div class="header">
-      <img src="https://via.placeholder.com/150" alt="Harvest Moon">
+      <img src="<%=game.getPosterGame()%>" alt="<%=game.getName() %>">
       <div class="header-content">
-        <h1>Harvest Moon</h1>
+          <h1><%=game.getName() %></h1>
         <div class="rating">
-          <span>4.9</span>
+            <span><%=game.getRating() %>   </span>
           <span>&#9733;</span>
         </div>
         <div class="details">
-          <p>Nama: Harvest Moon</p>
-          <p>Genre: Adventure, RPG</p>
-          <p>Device: PC</p>
-          <p>Harga: Rp. 175,000</p>
-          <p>Rilis: 31 Oktober 2004</p>
+          <p>Nama: <%=game.getName() %></p>
+          <p>Genre:<%=game.getGenre() %></p>
+          <p>Device: <%= game.getDevice() %></p>
+          <p>Harga:Rp <%= game.getPrice() %></p>
+          <p>Rilis: <%= game.getDate() %></p>
         </div>
       </div>
     </div>
     <div class="description">
-      Jelajahi dunia Anthos yang luas dengan bantuan teman penemu aneh Anda, Doc Jr. dan banyak lainnya! Terserah
-      padamu untuk menghidupkan kembali Harvest Goddess dan Harvest Sprite, serta menghubungkan kembali seluruh desa
-      Anthos satu sama lain!
+     <%= game.getDeskripsi() %>
     </div>
     <div class="reviews">
       <h2>Reviews</h2>
-      <div class="review-list">
-        <div class="review-item">Cute animals and characters. Story is nice but animal and child caring could be better. Wish days were longer. Overall, very amusing game.</div>
-        <div class="review-item">Amazing farming mechanics and nostalgic gameplay. Love the graphics and storytelling!</div>
-      </div>
+       <div class="review-list">
+        <%if(reviews!=null){%>
+           <%for(review review:reviews){ %>
+        <div class="review-item"><%=review.getKomen() %> Rating<%=review.getRating() %></div>
+        
+       <%}%>
+       </div>
+       <%}else{%>
+       <p>There is no review </p> 
+       <%}%>
     </div>
     <div class="review-input">
       <div class="rating-input">
-        <span>&#9733;</span>
-        <span>&#9733;</span>
-        <span>&#9733;</span>
-        <span>&#9733;</span>
-        <span>&#9733;</span>
+       
       </div>
-      <textarea placeholder="Masukkan Review.." rows="4"></textarea>
-      <button>Submit Review</button>
+        <form action="/Game" method="post">
+       <input type="hidden" name="action" value="addReview">
+       <input type="hidden" name="idGame" value="<%= game.getGameID()%>">
+       <input type="hidden" name="idUser" value="<%= user.getUserID() %>">
+       <textarea name="review" placeholder="Masukkan Review.." rows="4"></textarea>
+       <input type="number" name="rating" min="0" max="5" step="0.1" placeholder="Rating (0-5)" required>
+       <button>Submit Review</button>
+        </form>
     </div>
   </div>
+  <div class="gambar-latar"></div>
 </body>
 </html>
 

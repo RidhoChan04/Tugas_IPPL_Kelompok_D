@@ -23,7 +23,8 @@ public class Game {
     private int age;
     private String PosterGame;
     private Date Date;
-    private List<review> reviews;  // Composition relationship with Review
+    private List<review> reviews;  
+    private String deskripsi;
 
     public Game(int GameID, String Name, String Genre, String Device, double Price, String PosterGame, Date Date,int age) {
         this.GameID = GameID;
@@ -107,8 +108,21 @@ public class Game {
     public void setReviews(List<review> reviews) {
         this.reviews = reviews;
     }
-  
-    
-    
-    
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getDeskripsi() {
+        return deskripsi;
+    }
+ 
 }

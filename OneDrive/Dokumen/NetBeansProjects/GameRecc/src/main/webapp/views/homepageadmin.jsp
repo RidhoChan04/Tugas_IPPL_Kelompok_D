@@ -1,14 +1,12 @@
 <%-- 
-    Document   : homepage
-    Created on : 20 Nov 2024, 20.17.47
+    Document   : homepageadmin
+    Created on : 22 Nov 2024, 01.18.34
     Author     : Victus
-    ok
 --%>
 
-<%@page import="java.util.ArrayList"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="model.Game"%>
 <%@page import="java.util.List"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -154,47 +152,23 @@
   </style>
 </head>
 <body>
-    <%  List<Game>games=(List<Game>)request.getSession().getAttribute("games");   
-        List<Game>filteredGame=(List<Game>)request.getSession().getAttribute("filteredGame");
-        List<Game>sortedGame=(List<Game>)request.getSession().getAttribute("sortedGame");
-        List<Game>displayGame=new ArrayList<>();
-        if(filteredGame!=null){
-           displayGame=filteredGame;
-           
-           if(sortedGame!=null){
-            displayGame=sortedGame;
-        }
-           
-        }else{
-        
-           displayGame=games;
-           
-           if(sortedGame!=null){
-            displayGame=sortedGame;
-        }
-        }
-    
-    
-    
-    %>
+    <%  List<Game>games=(List<Game>)request.getSession().getAttribute("games");   %>
   <div class="header">
     <div class="logo">
       <img src="https://via.placeholder.com/50" alt="GameRecce Logo">
       <h2>GameRecce</h2>
     </div>
-      <form action="/Game" method="get">
-          <input type="hidden" name="action" value="searchGame">
-          <input type="text" name="query" placeholder="Search...">
-          <button type="submit" class="search-btn"><img src="https://via.placeholder.com/25" alt="Search Icon"></button>
-    </form>
-    
+    <div class="search">
+      <img src="https://via.placeholder.com/25" alt="Search Icon">
+    </div>
   </div>
   <div class="main-content">
-    <button onclick="window.location.href='/Game?action=sortGame'">Sort Game</button>
+    <button class="sort-button">Sorting Game</button>
+    <button onclick="window.location.href='/views/adminpage.jsp'">Home</button>
     <div class="game-grid">
          <% if (!games.isEmpty()) { %>
-    <% for (Game game : displayGame) { %>
-    <a href="/Game?action=displaySingleGame&id=<%=game.getGameID()%>" >  
+    <% for (Game game : games) { %>
+    <a href="/Game?action=DisplayGameEdit&id=<%=game.getGameID()%>" >  
     <div class="game-card">
           <img src="<%=game.getPosterGame()%>" alt="Game Image">
           <div class="game-card-title"><%=game.getName()%></div>
@@ -214,5 +188,3 @@
   </footer>
 </body>
 </html>
-
-

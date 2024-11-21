@@ -27,21 +27,19 @@ public class GameDao {
     
     private final String url = "jdbc:mysql://localhost:3306/mydb";
     private final String dbUser = "root";
-    private final String dbPassword = "@Faizhkl06";
+    private final String dbPassword = "ridho";
 
     // Method to add a new movie
-    public boolean addMovie(String name,String genre,String device,double Price,int age,double rating,java.util.Date Date,String PosterGame) throws SQLException {
-        String sql = "INSERT INTO game (Name, Genre , Device ,Price ,Age,Rating,Date,PosterGame) VALUES (?,?,?,?,?,?,?,?)";
+    public boolean addGame(String name,String genre,String device,double Price,int age,double rating,java.util.Date Date,String PosterGame,String Deskripsi) throws SQLException {
+        String sql = "INSERT INTO game (Name, Genre , Device ,Price ,Age,Rating,Date,PosterGame,Deskripsi) VALUES (?,?,?,?,?,?,?,?,?)";
          try {
-    Class.forName("com.mysql.cj.jdbc.Driver");
-} catch (ClassNotFoundException e) {
-    System.out.println("MySQL JDBC Driver not found: " + e.getMessage());
-}
+             Class.forName("com.mysql.cj.jdbc.Driver");
+            } catch (ClassNotFoundException e) {
+               System.out.println("MySQL JDBC Driver not found: " + e.getMessage());
+             }
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            
-            
             stmt.setString(1, name);
             stmt.setString(2, genre);
             stmt.setString(3, device);
@@ -51,6 +49,7 @@ public class GameDao {
             java.sql.Date releaseDateSql = new java.sql.Date(Date.getTime()); // Convert to java.sql.Date
             stmt.setDate(7, releaseDateSql);
             stmt.setString(8, PosterGame);
+            stmt.setString(9, Deskripsi);
             
             
             
@@ -64,8 +63,8 @@ public class GameDao {
     
     
     
-    public boolean updateMovie(int GameID,String name,String genre,String device,double Price,int age,double rating,java.util.Date Date,String PosterGame) throws SQLException {
-        String sql = "UPDATE game SET Name=?, Genre=?, Device =?,Price =? ,Age=?,Rating=?,Date=?,PosterGame=? WHERE movieID = ?";
+    public boolean updateGame(int GameID,String name,String genre,String device,double Price,int age,double rating,java.util.Date Date,String PosterGame,String deskripsi) throws SQLException {
+        String sql = "UPDATE game SET Name=?, Genre=?, Device =?,Price =? ,Age=?,Rating=?,Date=?,PosterGame=?, Deskripsi=? WHERE GameID = ?";
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
@@ -78,13 +77,15 @@ public class GameDao {
             java.sql.Date releaseDateSql = new java.sql.Date(Date.getTime()); // Convert to java.sql.Date
             stmt.setDate(7, releaseDateSql);
             stmt.setString(8, PosterGame);
+            stmt.setString(9, deskripsi);
+            stmt.setInt(10, GameID);
 
             return stmt.executeUpdate() > 0; // Returns true if update was successful
         }
     }
 
     // Method to delete a movie by ID
-    public boolean deleteMovie(String name,String genre) throws SQLException {
+    public boolean deleteGame(String name,String genre) throws SQLException {
         String sql = "DELETE FROM game WHERE Name=? and Genre=?";
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -110,13 +111,18 @@ public class GameDao {
                
                  
                 String Name=rs.getString("Name");
-                String Genre=rs.getString("genre");
+                String Genre=rs.getString("Genre");
                 String Device = rs.getString("Device");
                 Double Price = rs.getDouble("Price");
                 int Age=rs.getInt("Age");
+                Double Rating=rs.getDouble("Rating");
                 Date Date=rs.getDate("Date");
                 String PosterGame=rs.getString("PosterGame");
-                return (new Game(GameID,Name, Genre,Device, Price,PosterGame, Date,Age));
+                String Deskripsi=rs.getString("Deskripsi");
+                Game game=new Game(GameID,Name,Genre,Device, Price,PosterGame, Date,Age);
+                game.setDeskripsi(Deskripsi);
+                game.setRating(Rating);
+                return (game);
             }
         }
         return null; // Returns null if no movie is found with the given ID
@@ -148,8 +154,8 @@ public class GameDao {
     }
     
     public List<Game> searchGameByTitle(String title) {
-    List<Game> game = new ArrayList<>();
-    String sql = "SELECT * FROM movies WHERE title LIKE ?";
+    List<Game> games = new ArrayList<>();
+    String sql = "SELECT * FROM game WHERE Name LIKE ?";
 
     try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
          PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -158,19 +164,20 @@ public class GameDao {
         ResultSet rs = stmt.executeQuery();
 
         while (rs.next()) {
-            int GameID = rs.getInt("movieID");
+            int GameID = rs.getInt("GameID");
                  
                 String Name=rs.getString("Name");
-                String Genre=rs.getString("genre");
+                String Genre=rs.getString("Genre");
                 String Device = rs.getString("Device");
                 Double Price = rs.getDouble("Price");
                 int Age=rs.getInt("Age");
                 Date Date=rs.getDate("Date");
                 String PosterGame=rs.getString("PosterGame");
+                String Deskripsi=rs.getString("Deskripsi");
                 
-                
-
-                game.add(new Game(GameID,Name, Genre,Device, Price,PosterGame, Date,Age));
+                Game game=new Game(GameID,Name,Genre,Device, Price,PosterGame,Date,Age);
+                game.setDeskripsi(Deskripsi);
+                games.add(game);
             
             
             
@@ -183,7 +190,36 @@ public class GameDao {
           return null;
       }
 
-     return game;
+     return games;
+    }
+    
+    
+    
+    public List<Game> getAllGameSorted() throws SQLException {
+        List<Game> games = new ArrayList<>();
+        String sql = "SELECT * FROM game order by Rating ASC";
+        try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+
+            while (rs.next()) {
+                int GameID = rs.getInt("GameID");
+                 
+                String Name=rs.getString("Name");
+                String Genre=rs.getString("Genre");
+                String Device = rs.getString("Device");
+                Double Price = rs.getDouble("Price");
+                int Age=rs.getInt("Age");
+                Date Date=rs.getDate("Date");
+                String PosterGame=rs.getString("PosterGame");
+                String deskripsi=rs.getString("Deskripsi");
+                Game game=new Game(GameID,Name, Genre,Device, Price,PosterGame, Date,Age);
+                game.setDeskripsi(deskripsi);
+                games.add(game);
+                
+            }
+        }
+        return games;
     }
 
     
