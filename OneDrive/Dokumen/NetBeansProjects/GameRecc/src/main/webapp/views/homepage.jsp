@@ -4,6 +4,8 @@
     Author     : Victus
 --%>
 
+<%@page import="model.Game"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <!DOCTYPE html>
@@ -117,6 +119,7 @@
   </style>
 </head>
 <body>
+    <%  List<Game>games=(List<Game>)request.getSession().getAttribute("games");   %>
   <div class="header">
     <div class="logo">
       <img src="https://via.placeholder.com/50" alt="GameRecce Logo">
@@ -129,30 +132,21 @@
   <div class="main-content">
     <button class="sort-button">Sorting Game</button>
     <div class="game-grid">
-      <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
-        <div class="game-card-title">Black Myth: Wukong</div>
+         <% if (!games.isEmpty()) { %>
+    <% for (Game game : games) { %>
+    <a href="/Game?action=displaySingleGame&id=<%=game.getGameID()%>" >  
+    <div class="game-card">
+          <img src="<%=game.getPosterGame()%>" alt="Game Image">
+          <div class="game-card-title"><%=game.getName()%></div>
       </div>
-      <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
-        <div class="game-card-title">Harvest Moon</div>
-      </div>
-      <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
-        <div class="game-card-title">Counter-Strike</div>
-      </div>
-      <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
-        <div class="game-card-title">NBA 2K25</div>
-      </div>
-      <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
-        <div class="game-card-title">Dragon Ball</div>
-      </div>
-      <div class="game-card">
-        <img src="https://via.placeholder.com/200x150" alt="Game Image">
-        <div class="game-card-title">MechWarrior</div>
-      </div>
+    </a>
+    <% } %>
+<% } else { %>
+    <p>No games available to display.</p>
+<% } %>
+      
+      
+ 
     </div>
   </div>
 </body>

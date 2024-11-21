@@ -32,16 +32,30 @@ import model.User;
  *
  * @author acer
  */
-@WebServlet(name = "MovieController", urlPatterns = {"/Movie"})
+@WebServlet(name = "GameController", urlPatterns = {"/Game"})
 @MultipartConfig 
 public class GameController  extends HttpServlet{
-    private final GameDao movieDao = new GameDao();
+    private final GameDao gameDao = new GameDao();
     private final ReviewDao ReviewDao = new ReviewDao();
     private final UserDao userDao = new UserDao();
     private final String uploadDirectory = "C:/uploaded_images"; // Change to your preferred upload directory
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        try {
+            List<Game>games=gameDao.getAllGame();
+            request.getSession().setAttribute("games", games);
+           
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        String action = request.getParameter("action");
+        
+        if(action.equals("displayGame")){
+            response.sendRedirect("/views/homepage.jsp");
+        }
         
     }
 
@@ -49,6 +63,12 @@ public class GameController  extends HttpServlet{
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         
     }
+    
+    
+    
+    
+    
+    
     
    
     
