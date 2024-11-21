@@ -87,7 +87,7 @@ public class UserController extends HttpServlet{
        boolean cekValidasiUser=userDao.validateUser(username, password);
        
        if(cekValidasiUser){
-           response.sendRedirect("/views/homepage.jsp");
+           response.sendRedirect("/Game?action=displayGame");
        }
         
         

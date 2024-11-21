@@ -123,7 +123,7 @@ public class GameDao {
     }
 
     // Method to retrieve all movies
-    public List<Game> getAllMovies() throws SQLException {
+    public List<Game> getAllGame() throws SQLException {
         List<Game> game = new ArrayList<>();
         String sql = "SELECT * FROM game";
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
@@ -147,7 +147,7 @@ public class GameDao {
         return game;
     }
     
-    public List<Game> searchMoviesByTitle(String title) {
+    public List<Game> searchGameByTitle(String title) {
     List<Game> game = new ArrayList<>();
     String sql = "SELECT * FROM movies WHERE title LIKE ?";
 
