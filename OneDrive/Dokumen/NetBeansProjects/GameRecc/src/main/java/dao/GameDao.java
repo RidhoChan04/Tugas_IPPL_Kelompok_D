@@ -27,7 +27,7 @@ public class GameDao {
     
     private final String url = "jdbc:mysql://localhost:3306/mydb";
     private final String dbUser = "root";
-    private final String dbPassword = "ridho";
+    private final String dbPassword = "zaidan";
 
     // Method to add a new movie
     public boolean addGame(String name,String genre,String device,double Price,int age,double rating,java.util.Date Date,String PosterGame,String Deskripsi) throws SQLException {

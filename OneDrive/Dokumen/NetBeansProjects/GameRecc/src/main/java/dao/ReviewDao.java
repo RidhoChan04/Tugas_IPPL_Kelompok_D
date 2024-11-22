@@ -17,7 +17,7 @@ public class ReviewDao {
 
    private final String url = "jdbc:mysql://localhost:3306/mydb";
     private final String dbUser = "root";
-    private final String dbPassword = "ridho";
+    private final String dbPassword = "zaidan";
 
     // Method to add a review
     public boolean addReview(int gameID, int userID, double rating, String comment) {

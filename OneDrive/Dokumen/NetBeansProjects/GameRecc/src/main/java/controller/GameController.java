@@ -192,7 +192,7 @@ public class GameController  extends HttpServlet{
             
         } else {
             
-            response.getWriter().println("Failed to add movie.");
+            response.getWriter().println("Gagal menambahkan Game.");
         }
     }
     
