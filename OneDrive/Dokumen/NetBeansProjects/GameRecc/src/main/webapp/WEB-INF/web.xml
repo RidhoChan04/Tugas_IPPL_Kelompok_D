@@ -10,6 +10,6 @@
     </session-config>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
-        <url-pattern>/image/*</url-pattern>
+        <url-pattern>/gambar/*</url-pattern>
     </servlet-mapping>
 </web-app>

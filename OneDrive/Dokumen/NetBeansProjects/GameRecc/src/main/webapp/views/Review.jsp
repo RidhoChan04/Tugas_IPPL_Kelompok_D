@@ -34,7 +34,7 @@
             left: 0;
             width: 100%; /* Membuat gambar memenuhi layar */
             height: 100%; /* Membuat gambar memenuhi layar */
-            background-image: url('Group_8.png');
+            background-image: url('/gambar/Group_8.png');
             background-size: cover; /* Mengatur gambar agar menutupi seluruh area */
             background-position: center; /* Posisikan gambar di tengah */
             z-index: -1; /* Menempatkan gambar di belakang konten */
@@ -197,7 +197,7 @@
     %>
   <div class="container">
     <div class="header">
-      <img src="<%=game.getPosterGame()%>" alt="<%=game.getName() %>">
+      <img src="${pageContext.request.contextPath}/<%= game.getPosterGame() %>" alt="<%=game.getName() %>">
       <div class="header-content">
           <h1><%=game.getName() %></h1>
         <div class="rating">

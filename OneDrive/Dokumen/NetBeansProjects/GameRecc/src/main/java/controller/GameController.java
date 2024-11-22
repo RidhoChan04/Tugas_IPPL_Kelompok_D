@@ -270,7 +270,7 @@ public class GameController  extends HttpServlet{
             
         } else {
             response.getWriter().print(id);
-            response.getWriter().println("Failed to edit movie.");
+            response.getWriter().println("Gagal mengubah game.");
         }
         
     }

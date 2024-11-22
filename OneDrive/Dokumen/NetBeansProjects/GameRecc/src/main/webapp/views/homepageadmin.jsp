@@ -19,6 +19,11 @@
       padding: 0;
       font-family: Arial, sans-serif;
       background-color: #002b40;
+      background-image: url('\gambar\Group_8.png'); 
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
       color: white;
       display: flex;
       flex-direction: column;
@@ -43,11 +48,6 @@
       gap: 10px;
     }
 
-    .header .logo img {
-      width: 50px;
-      height: 50px;
-    }
-
     .header h2 {
       font-size: 1.8rem;
       font-weight: bold;
@@ -55,9 +55,16 @@
       margin: 0;
     }
 
-    .header .search {
-      background-color: #0056b3;
-      width: 45px;
+    /* Search button container */
+    .search-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search {
+      background-color: #ffffff00;
+      width: 50px;
       height: 45px;
       border-radius: 50%;
       display: flex;
@@ -66,15 +73,36 @@
       cursor: pointer;
     }
 
-    .header .search img {
-      width: 25px;
-      height: 25px;
+    .search img {
+      width: 45px;
+      height: 45px;
+    }
+
+    /* Search input (initially hidden) */
+    .search-input {
+      display: none;
+      width: 0;
+      padding: 0;
+      border: none;
+      background-color: transparent;
+      color: white;
+      font-size: 16px;
+      transition: width 0.4s ease;
+      outline: none;
+    }
+
+    /* Display search input when search button is clicked */
+    .search-container.active .search-input {
+      display: inline-block;
+      width: 200px;
+      border-bottom: 2px solid #8bc8bd;
     }
 
     .main-content {
       width: 90%;
       max-width: 1200px;
       margin-top: 30px;
+      flex-grow: 1;
     }
 
     .sort-button {
@@ -100,7 +128,6 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
       gap: 20px;
-      padding-bottom: 20px;
     }
 
     .game-card {
@@ -155,11 +182,11 @@
     <%  List<Game>games=(List<Game>)request.getSession().getAttribute("games");   %>
   <div class="header">
     <div class="logo">
-      <img src="https://via.placeholder.com/50" alt="GameRecce Logo">
+      <img src="/gambar/logo_gamerec.png" alt="GameRecce Logo">
       <h2>GameRecce</h2>
     </div>
     <div class="search">
-      <img src="https://via.placeholder.com/25" alt="Search Icon">
+      <img src="/gambar/search.png" alt="Search Icon">
     </div>
   </div>
   <div class="main-content">
@@ -170,7 +197,7 @@
     <% for (Game game : games) { %>
     <a href="/Game?action=DisplayGameEdit&id=<%=game.getGameID()%>" >  
     <div class="game-card">
-          <img src="<%=game.getPosterGame()%>" alt="Game Image">
+          <img src="${pageContext.request.contextPath}/<%= game.getPosterGame() %>" alt="Game Image">
           <div class="game-card-title"><%=game.getName()%></div>
       </div>
     </a>
