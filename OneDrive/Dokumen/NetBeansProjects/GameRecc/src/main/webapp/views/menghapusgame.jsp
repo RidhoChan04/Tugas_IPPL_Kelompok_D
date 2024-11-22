@@ -128,11 +128,36 @@
     .notification.show {
       display: block;
     }
+    
+    .error-message {
+      color: #DB0E12; /* Set the text color to red */
+      font-size: 1rem;
+      text-align: center;
+      margin: 15px auto; /* Center horizontally and add spacing */
+      width: 80%; /* Center width */
+      background-color: transparent; /* Transparent background for cleaner look */
+      padding: 10px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px; /* Add margin for spacing below error message */
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Menghapus Game</h1>
+    
+    <% String errorMessage = (String) request.getAttribute("errorM");
+         if (errorMessage != null) { %>
+        <div class="error-message">
+          <%= errorMessage %>
+        </div>
+      <% } %>
+      
     <form id="gameForm"  action="/Game" method="post" enctype="multipart/form-data">
      <input type="hidden" name="action" value="deleteGame">   
       <label for="name">Nama:</label>

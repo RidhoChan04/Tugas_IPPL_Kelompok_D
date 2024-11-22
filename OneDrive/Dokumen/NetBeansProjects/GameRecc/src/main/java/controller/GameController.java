@@ -210,7 +210,8 @@ public class GameController  extends HttpServlet{
        if(DeletGame) {
             response.sendRedirect("/Game?action=home"); // Refresh the movie list 
        }else {
-            response.getWriter().println("Failed to delete movie.");
+           request.setAttribute("errorM", "Game Tersebut Tidak Ditemukan");
+           request.getRequestDispatcher("/views/menghapusgame.jsp").forward(request, response);
        }
        
     }

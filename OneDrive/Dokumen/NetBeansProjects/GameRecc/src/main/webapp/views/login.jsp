@@ -114,6 +114,16 @@
     .login-box a:hover span {
       color: #dde6e9;
     }
+    
+    .error-message {
+      color: #DB0E12; /* Set the text color to red */
+      background-color: transparent; /* Transparent background for a cleaner look */
+      padding: 10px;
+      font-size: 1rem;
+      text-align: center;
+      margin-bottom: 15px;
+      width: 80%;
+    }
   </style>
 </head>
 <body>
@@ -123,6 +133,14 @@
     </div>
     <div class="login-box">
       <h2>Log In</h2>
+      
+      <% String errorMessage = (String) request.getAttribute("errorMessage");
+         if (errorMessage != null) { %>
+        <div class="error-message">
+          <%= errorMessage %>
+        </div>
+      <% } %>
+      
       <form action="/User" method="post">
         <input type="hidden" name="action" value="login">
         <input type="text" name="username" placeholder="&#xf007; Username">

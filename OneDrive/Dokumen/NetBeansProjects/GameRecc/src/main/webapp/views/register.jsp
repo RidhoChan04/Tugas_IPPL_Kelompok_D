@@ -11,12 +11,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GameRecce Sign Up</title>
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameRecce Sign Up</title>
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-color: #002b40;
+      background: url('/gambar/bckground_figma.jpg') no-repeat center center fixed;
+      background-size: cover;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -24,31 +31,24 @@
     }
 
     .container {
-      background-color: #e0e0e0;
-      width: 90%;
-      max-width: 1200px;
-      height: 450px;
-      border-radius: 15px;
+      background-color: #D9D9D9; /* Transparansi untuk menampilkan latar belakang */
+      width: 100%;
+      max-width: 800px;
+      height: 100%;
+      margin-right:-1000px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      padding: 20px;
-    }
-
-    .logo-section {
-      background-color: #003b57;
-      width: 45%;
-      height: 90%;
-      border-radius: 20px;
-      display: flex;
-      justify-content: center;
       align-items: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 200px;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
     }
 
     .logo-section img {
-      width: 150px;
-      height: auto;
+      width: 700px;
+      height: 700px;
+      border-radius: 35px;
+      position: relative;
+      left:-700px
     }
 
     .logo-section h1 {
@@ -61,22 +61,28 @@
     .form-section {
       width: 50%;
       padding: 20px;
+      position: relative;
+      left:-650px;
     }
 
     .form-section h2 {
-      font-size: 2.5rem;
+      font-size: 4rem;
+      width: 300px;
       color: #000000;
       margin-bottom: 10px;
+  
     }
 
     .form-section p {
-      color: #666;
+      color: #28595E;
       font-size: 1rem;
       margin-bottom: 20px;
     }
 
     .form-section a {
-      color: #0056b3;
+      position: relative;
+      top: -220px;
+      color: #879FA2;
       text-decoration: none;
       font-size: 0.9rem;
       margin-bottom: 20px;
@@ -84,6 +90,7 @@
 
     .form-section a:hover {
       text-decoration: underline;
+      color: #ffffff;
     }
 
     .form-section input {
@@ -102,7 +109,7 @@
       padding: 10px;
       border: none;
       border-radius: 5px;
-      background-color: #0056b3;
+      background-color: #28595E;
       color: white;
       font-size: 1rem;
       cursor: pointer;
@@ -115,11 +122,14 @@
 
     .small-link {
       font-size: 0.8rem;
-      color: #003b57;
+      color: #ff000000;
+      position: relative;
+      top: -10px;
     }
 
     .small-link span {
       text-decoration: underline;
+      color: #ffffff;
       cursor: pointer;
     }
   </style>
@@ -127,7 +137,7 @@
 <body>
   <div class="container">
     <div class="logo-section">
-      <img src="https://via.placeholder.com/150" alt="GameRecce Logo">
+      <img src='/gambar/logogamerec_kotak.png' alt="GameRecce Logo">
     </div>
     <div class="form-section">
       <h2>Sign Up</h2>

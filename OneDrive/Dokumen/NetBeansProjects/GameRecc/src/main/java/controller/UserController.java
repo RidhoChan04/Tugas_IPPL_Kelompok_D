@@ -94,6 +94,9 @@ public class UserController extends HttpServlet{
            response.sendRedirect("/Game?action=home");
        }else if(cekValidasiAdmin){
            response.sendRedirect("/views/adminpage.jsp");
+       }else {
+           request.setAttribute("errorMessage", "Username atau password salah.");
+           request.getRequestDispatcher("/views/login.jsp").forward(request, response);
        }
         
         
