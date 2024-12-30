@@ -11,145 +11,136 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GameRecce Login</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-color: #002b40;
+      background-color: #f2f2f2;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
     }
 
-    .container {
-      background-color: #e0e0e0;
-      width: 80%;
-      max-width: 1000px;
-      height: 500px;
-      border-radius: 15px;
+    .login-container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
+      background-color: #D9D9D9;
+      width: 100%;
+    }
+
+    .left-panel {
+      background-color: #093545;
+      height: 100vh;
+      display: flex;
+      width: 40%; 
       padding: 20px;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      justify-content: center;
+      position: relative; 
     }
 
-    .logo {
-      font-size: 2.5rem;
-      color: #8bc8bd;
-      font-weight: bold;
-      margin-left: 20px;
+    #logo {
+      border-radius: 25px;
+      max-width: 120%; 
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(30%, -50%); 
     }
 
-    .logo span {
-      color: #7fb3d4;
+    #gambarBwh {
+      max-width: 100%; 
+      height: auto;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      object-fit: cover; 
+      overflow: hidden; 
     }
 
-    .login-box {
-      background-color: #749aa8;
-      width: 40%;
-      height: 80%;
-      border-radius: 20px;
+    .right-panel {
+      padding: 80px 180px; 
+      padding-right: 350px;
+      width: 60%; 
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
-      padding: 30px;
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
     }
 
-    .login-box h2 {
-      font-size: 2rem;
+    .right-panel h2 {
+      font-size: 4rem;  
       font-weight: bold;
-      color: #ffffff;
       margin-bottom: 20px;
     }
 
-    .login-box input {
-      width: 80%;
-      padding: 12px;
-      margin: 10px 0;
+    .form-control {
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 1.1rem; 
+      background-color: #879FA2;
+    }
+
+    .btn-primary {
+      background-color: #043744;
       border: none;
-      border-radius: 5px;
-      outline: none;
-      font-size: 1rem;
-      background-color: #dde6e9;
-      font-family: Arial, FontAwesome;
+      border-radius: 10px;
+      padding: 15px; 
+      font-size: 1.2rem; 
     }
 
-    .login-box button {
-      width: 80%;
-      padding: 12px;
-      margin-top: 20px;
-      border: none;
-      border-radius: 5px;
-      background-color: #002b40;
-      color: white;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    .btn-primary:hover {
+      background-color: #065063;
     }
 
-    .login-box button:hover {
-      background-color: #003b57;
-      transform: translateY(-2px);
-    }
-
-    .login-box a {
-      margin-top: 10px;
-      font-size: 0.9rem;
-      color: #ffffff;
+    a {
+      color: #043744;
       text-decoration: none;
     }
 
-    .login-box a span {
+    a:hover {
       text-decoration: underline;
-      cursor: pointer;
     }
-
-    .login-box a:hover span {
-      color: #dde6e9;
-    }
-    
-    .error-message {
-      color: #DB0E12; /* Set the text color to red */
-      background-color: transparent; /* Transparent background for a cleaner look */
-      padding: 10px;
-      font-size: 1rem;
-      text-align: center;
-      margin-bottom: 15px;
-      width: 80%;
+    .error-message{
+        color: #DB0E12;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo">
-      Game<span>Recce</span>
+  <div class="login-container">
+    <div class="left-panel">
+        <img id="logo" src="gambar/logogamerec_kotak.png" alt="GameRecce Logo">
+        <img id="gambarBwh" src="gambar/Group_8.png" alt="GameRecce Logo">
     </div>
-    <div class="login-box">
-      <h2>Log In</h2>
-      
-      <% String errorMessage = (String) request.getAttribute("errorMessage");
+    <div class="right-panel">
+      <h2>Sign In</h2>
+       <% String errorMessage = (String) request.getAttribute("errorMessage");
          if (errorMessage != null) { %>
         <div class="error-message">
           <%= errorMessage %>
         </div>
       <% } %>
+      <p>No account yet? <a href="/views/register.jsp">Sign Up</a></p>
       
       <form action="/User" method="post">
         <input type="hidden" name="action" value="login">
-        <input type="text" name="username" placeholder="&#xf007; Username">
-        <input type="password" name="password" placeholder="&#xf023; Password">
-        <button type="submit">Login</button>
+        <div class="mb-3">
+          <input type="text" class="form-control" id="username" name="username" placeholder="&#xf007; Username">
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="password" name="password" placeholder="&#xf023; Password">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Sign In</button>
       </form>
-      <a href="/views/register.jsp">No account yet? <span>Register</span></a>
+
+      <div class="text-center mt-3">
+        <p>Not admin yet? <a href="/request-access">Request Access</a></p>
+      </div>
     </div>
   </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

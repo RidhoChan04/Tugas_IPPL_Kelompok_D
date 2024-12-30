@@ -11,147 +11,130 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GameRecce Sign Up</title>
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GameRecce Sign Up</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background: url('/gambar/bckground_figma.jpg') no-repeat center center fixed;
-      background-size: cover;
+      background-color: #f2f2f2;
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
     }
 
-    .container {
-      background-color: #D9D9D9; /* Transparansi untuk menampilkan latar belakang */
-      width: 100%;
-      max-width: 800px;
-      height: 100%;
-      margin-right:-1000px;
+    .login-container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 200px;
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+      background-color: #D9D9D9;
+      width: 100%;
     }
 
-    .logo-section img {
-      width: 700px;
-      height: 700px;
-      border-radius: 35px;
-      position: relative;
-      left:-700px
-    }
-
-    .logo-section h1 {
-      color: #ffffff;
-      font-size: 2.5rem;
-      text-align: center;
-      margin-top: 20px;
-    }
-
-    .form-section {
-      width: 50%;
+    .left-panel {
+      background-color: #093545;
+      height: 100vh;
+      display: flex;
+      width: 40%; 
       padding: 20px;
-      position: relative;
-      left:-650px;
+      justify-content: center;
+      position: relative; 
     }
 
-    .form-section h2 {
-      font-size: 4rem;
-      width: 300px;
-      color: #000000;
-      margin-bottom: 10px;
-  
+    #logo {
+      max-width: 120%;
+      border-radius: 25px;
+      height: auto;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translate(30%, -50%); 
     }
 
-    .form-section p {
-      color: #28595E;
-      font-size: 1rem;
+    #gambarBwh {
+      max-width: 100%; 
+      height: auto;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      object-fit: cover; 
+      overflow: hidden; 
+    }
+
+    .right-panel {
+      padding: 80px 180px; 
+      padding-right: 350px;
+      width: 60%; 
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .right-panel h2 {
+      font-size: 4rem;  
+      font-weight: bold;
       margin-bottom: 20px;
     }
 
-    .form-section a {
-      position: relative;
-      top: -220px;
-      color: #879FA2;
+    .form-control {
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-size: 1.1rem; 
+      background-color: #879FA2;
+    }
+
+    .btn-primary {
+      background-color: #043744;
+      border: none;
+      border-radius: 10px;
+      padding: 15px; 
+      font-size: 1.2rem; 
+    }
+
+    .btn-primary:hover {
+      background-color: #065063;
+    }
+
+    a {
+      color: #043744;
       text-decoration: none;
-      font-size: 0.9rem;
-      margin-bottom: 20px;
     }
 
-    .form-section a:hover {
+    a:hover {
       text-decoration: underline;
-      color: #ffffff;
     }
 
-    .form-section input {
-      width: 90%;
-      padding: 10px;
-      margin: 10px 0;
-      border: none;
-      border-radius: 5px;
-      outline: none;
-      font-size: 1rem;
-      background-color: #dde6e9;
-    }
-
-    .form-section button {
-      width: 90%;
-      padding: 10px;
-      border: none;
-      border-radius: 5px;
-      background-color: #28595E;
-      color: white;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .form-section button:hover {
-      background-color: #003b57;
-    }
-
-    .small-link {
-      font-size: 0.8rem;
-      color: #ff000000;
-      position: relative;
-      top: -10px;
-    }
-
-    .small-link span {
-      text-decoration: underline;
-      color: #ffffff;
-      cursor: pointer;
+    .error-message {
+      color: #DB0E12;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="logo-section">
-      <img src='/gambar/logogamerec_kotak.png' alt="GameRecce Logo">
+  <div class="login-container">
+    <div class="left-panel">
+        <img id="logo" src="../gambar/logogamerec_kotak.png" alt="GameRecce Logo">
+        <img id="gambarBwh" src="../gambar/Group_8.png" alt="GameRecce Logo">
     </div>
-    <div class="form-section">
+    <div class="right-panel">
       <h2>Sign Up</h2>
       <form action="/User" method="post">
-      <input type="hidden" name="action" value="register">
-      
-      <input type="text" name="username" placeholder="&#xf007; Username" style="font-family: Arial, FontAwesome;">
-      <input type="password" name="password" placeholder="&#xf023; Password" style="font-family: Arial, FontAwesome;">
-      <button>Sign Up</button>
+        <input type="hidden" name="action" value="register">
+        <div class="mb-3">
+          <input type="text" class="form-control" id="username" name="username" placeholder="&#xf007; Username" style="font-family: Arial, FontAwesome;">
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" id="password" name="password" placeholder="&#xf023; Password" style="font-family: Arial, FontAwesome;">
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
       </form>
-      <p class="small-link">Not admin yet? <span>Request Access</span></p>
-      <p>Existing User? <a href="#">Log in</a></p>
+
+      <div class="text-center mt-3">
+        <p>Not admin yet? <a href="/request-access">Request Access</a></p>
+        <p>Existing User? <a href="/login">Sign In</a></p>
+      </div>
     </div>
   </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-

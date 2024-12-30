@@ -14,6 +14,10 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <jakartaee>8.0.0</jakartaee>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jakartaeee>10.0.0</jakartaeee>
+        <sonar.login>admin</sonar.login>
+        <sonar.password>P4lep4lep4leh3h3h3!@#$</sonar.password>
     </properties>
     
     <dependencies>
@@ -82,6 +86,11 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>3.9.1.2184</version>
             </plugin>
         </plugins>
     </build>

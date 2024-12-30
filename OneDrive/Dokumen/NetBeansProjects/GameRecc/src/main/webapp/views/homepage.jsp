@@ -207,7 +207,7 @@
   <div class="header">
     <div class="logo">
       <img src="/gambar/logo_gamerec.png" alt="GameRecce Logo">
-      <h2>GameRecce</h2>
+      <h2>GameRecc</h2>
     </div>
       <form action="/Game" method="get">
           <input type="hidden" name="action" value="searchGame">
@@ -238,7 +238,7 @@
     </div>
   </div>
   <footer>
-    &copy; 2024 GameRecce. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+    &copy; 2024 GameRecc. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
   </footer>
 </body>
 </html>
