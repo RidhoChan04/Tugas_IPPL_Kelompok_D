@@ -171,29 +171,34 @@
   <div class="navbar-dropdown">
     <button class="btn btn-outline-light">Categories</button>
     <div class="navbar-dropdown-content">
-      <a href="/Game?action=filter&category=Action">Action</a>
-      <a href="/Game?action=filter&category=Adventure">Adventure</a>
-      <a href="/Game?action=filter&category=RPG">RPG</a>
-      <a href="/Game?action=filter&category=Strategy">Strategy</a>
-      <a href="/Game?action=filter&category=Sports">Sports</a>
+      <a href="/Game?action=Action">Action</a>
+      <a href="/Game?action=Adventure">Adventure</a>
+      <a href="/Game?action=RPG">RPG</a>
+      <a href="/Game?action=Strategy">Strategy</a>
+      <a href="/Game?action=Sports">Sports</a>
     </div>
   </div>
 
   <div class="sorting-dropdown">
     <button class="btn btn-outline-light">Sort</button>
     <div class="sorting-dropdown-content">
-      <a href="/Game?action=sort&by=az">A-Z</a>
-      <a href="/Game?action=sort&by=za">Z-A</a>
-      <a href="/Game?action=sort&by=toprated">Top Rated</a>
+      <a href="/Game?action=sortAZ">A-Z</a>
+      <a href="/Game?action=sortZA">Z-A</a>
+      <a href="/Game?action=sortTOP">Top Rated</a>
     </div>
   </div>
 
   <div class="profile-icon">
     <img src="/gambar/profile_user.png" alt="User Profile">
-    <span>User</span>
-    <button type="submit" name="action" value="logout" class="btn btn-danger btn-sm">Logout</button>
+    <span>User</span>1
+    <form action="/User" method="post" class="d-flex">
+    <input type="hidden" name="action" value="logout">
+    <button type="submit" class="btn btn-danger btn-sm">Logout</button>
+    </form>
   </div>
 </div>
+    
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

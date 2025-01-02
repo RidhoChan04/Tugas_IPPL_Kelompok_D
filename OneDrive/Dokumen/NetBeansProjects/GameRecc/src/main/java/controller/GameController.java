@@ -100,35 +100,41 @@ public class GameController  extends HttpServlet{
             List<Game>filteredGame=searchGame(request,response);
             request.getSession().setAttribute("filteredGame", filteredGame);
             response.sendRedirect("/views/homepage.jsp");
-        }else if(action.equals("sortGame")){
+        }else if(action.equals("sortAZ")){
             try {
-                List<Game>sortedGame=SortingGame(request,response);
+                List<Game>sortedGame=SortingGame(request,response,"AZ");
                 response.getWriter().print(sortedGame.getFirst().getGameID());
                 request.getSession().setAttribute("sortedGame", sortedGame);
                 response.sendRedirect("/views/homepage.jsp");
             } catch (SQLException ex) {
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }else if ("sort".equals(action)) {
-    String sortBy = request.getParameter("by");
-    List<Game> games = (List<Game>) request.getSession().getAttribute("games");
-
-    if (games != null && !games.isEmpty()) {
-        if ("az".equals(sortBy)) {
-            games.sort(Comparator.comparing(Game::getName)); // Sorting A-Z
-        } else if ("za".equals(sortBy)) {
-            games.sort(Comparator.comparing(Game::getName).reversed()); // Sorting Z-A
-        } else if ("toprated".equals(sortBy)) {
-            games.sort(Comparator.comparingDouble(Game::getRating).reversed()); // Sorting by Rating
-        }
-        request.getSession().setAttribute("sortedGame", games); // Update sorted list
-    }
-
-    response.sendRedirect(request.getContextPath() + "/Game?action=homepage");
-    }
-
+        }else if(action.equals("sortZA")){
+            try {
+                List<Game>sortedGame=SortingGame(request,response,"ZA");
+                response.getWriter().print(sortedGame.getFirst().getGameID());
+                request.getSession().setAttribute("sortedGame", sortedGame);
+                response.sendRedirect("/views/homepage.jsp");
+            } catch (SQLException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if(action.equals("sortTOP")){
+            try {
+                List<Game>sortedGame=SortingGame(request,response,"TOP");
+                response.getWriter().print(sortedGame.getFirst().getGameID());
+                request.getSession().setAttribute("sortedGame", sortedGame);
+                response.sendRedirect("/views/homepage.jsp");
+            } catch (SQLException ex) {
+                Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }else if(action.equals("Genre")){
+            request.getSession().setAttribute("Genre", null);
+            List<Game>filteredGame=searchGame(request,response);
+            request.getSession().setAttribute("filteredGame", filteredGame);
+            response.sendRedirect("/views/homepage.jsp");
         
     }   
+}
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -163,12 +169,10 @@ public class GameController  extends HttpServlet{
      }
     
     
+    }
     
     
     
-    
-        
-}
     
     protected void AddGame(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String name = request.getParameter("name");
@@ -313,13 +317,24 @@ public class GameController  extends HttpServlet{
        
     }
     
-    protected List<Game> SortingGame(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, SQLException {
+    protected List<Game> SortingGame(HttpServletRequest request, HttpServletResponse response, String pil) throws ServletException, IOException, SQLException {
+        List<Game>SortedGames = null;
+        if (pil.equals("AZ")) {
+           SortedGames=gameDao.getAllGameSortedAZ();
+        }else if (pil.equals("ZA")) {
+            SortedGames=gameDao.getAllGameSortedZA();
+        }else if (pil.equals("TOP")) {
+            SortedGames=gameDao.getAllGameSortedTOP(); 
+        }
+        return SortedGames;  
+    }
+    
+    protected List<Game> Genre(HttpServletRequest request, HttpServletResponse response, String pil) throws ServletException, IOException, SQLException {
+        String query = request.getParameter("query");
         
+        List<Game>filteredGames=gameDao.GenreSort(query);
         
-        List<Game>SortedGames=gameDao.getAllGameSorted();
-        
-        return SortedGames; 
-       
+        return filteredGames; 
     }
 
 }

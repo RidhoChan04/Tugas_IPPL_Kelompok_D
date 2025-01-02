@@ -20,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import model.Game;
 
@@ -65,8 +66,9 @@ public class UserController extends HttpServlet{
             request.getSession().setAttribute("user", user);
             handleLogin(request,response);
         }else if (action.equals("logout")){
+            HttpSession sesi = request.getSession();
             request.getSession().invalidate();
-            response.sendRedirect("/views?action=login");
+            response.sendRedirect("/views/login.jsp");
         }
         
         
