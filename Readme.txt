@@ -1,4 +1,4 @@
 Pemilihan tool:
 DBMS	: My SQL
 IMK	: Figma
-Bahasa Pemprogaman : HTML dan PHP 
+Bahasa Pemprogaman : JSP dan JAVA
