@@ -26,7 +26,7 @@ public class Game {
     private List<review> reviews;  
     private String deskripsi;
 
-    public Game(int GameID, String Name, String Genre, String Device, double Price, String PosterGame, Date Date,int age) {
+    public Game(int GameID, String Name, String Genre, String Device, double Price, String PosterGame, Date Date,int age, double Rating) {
         this.GameID = GameID;
         this.Name = Name;
         this.Genre = Genre;
@@ -35,6 +35,7 @@ public class Game {
         this.PosterGame = PosterGame;
         this.Date = Date;
         this.age=age;
+        this.Rating=Rating;
     }
 
     public int getGameID() {

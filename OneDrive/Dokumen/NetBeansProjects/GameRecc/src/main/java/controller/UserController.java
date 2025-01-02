@@ -64,6 +64,9 @@ public class UserController extends HttpServlet{
             User user=userDao.selectUser(username, password);
             request.getSession().setAttribute("user", user);
             handleLogin(request,response);
+        }else if (action.equals("logout")){
+            request.getSession().invalidate();
+            response.sendRedirect("/views?action=login");
         }
         
         
@@ -73,14 +76,17 @@ public class UserController extends HttpServlet{
         
         String username=request.getParameter("username");
         String password=request.getParameter("password");
-        
-       boolean cekRegis=userDao.insertUser(username,password);
        
-       if(cekRegis){
-           response.sendRedirect("/views/login.jsp");
-       }
-        
-        
+       boolean cekValidasiUser=userDao.validUser(username);
+       
+       if(cekValidasiUser){
+           request.setAttribute("errorMessage", "Username sudah digunakan");
+           request.getRequestDispatcher("/views/register.jsp").forward(request, response);
+       }else{
+           userDao.insertUser(username,password);
+           request.setAttribute(username, "username");
+           request.getRequestDispatcher("/views/login.jsp").forward(request, response);
+       }   
     }
     
     protected void handleLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -93,7 +99,7 @@ public class UserController extends HttpServlet{
        if(cekValidasiUser){
            response.sendRedirect("/Game?action=home");
        }else if(cekValidasiAdmin){
-           response.sendRedirect("/views/adminpage.jsp");
+           response.sendRedirect("/Game?action=admin");
        }else {
            request.setAttribute("errorMessage", "Username atau password salah.");
            request.getRequestDispatcher("/views/login.jsp").forward(request, response);

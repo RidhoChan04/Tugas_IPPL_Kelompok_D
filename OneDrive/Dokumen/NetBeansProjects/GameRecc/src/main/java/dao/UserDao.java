@@ -174,7 +174,30 @@ public class UserDao {
             return false;
         }
     }
+
         
+        public boolean validUser(String username) {
+        String query = "SELECT username FROM user WHERE username = ?";
+        try {
+             Class.forName("com.mysql.cj.jdbc.Driver");
+             } catch (ClassNotFoundException e) {
+             System.out.println("MySQL JDBC Driver not found: " + e.getMessage());
+                }
+        try (Connection conn = DriverManager.getConnection(url, user, pasword);
+             PreparedStatement statement = conn.prepareStatement(query)) {
+
+            statement.setString(1, username);
+
+            
+            ResultSet resultSet = statement.executeQuery();
+           
+            return resultSet.next();
+
+        } catch (SQLException e) {
+            System.out.println("Error validating user: " + e.getMessage());
+            return false;
+        }
+    }    
     
     public User selectUser(String username, String password) {
     String query = "SELECT * FROM user WHERE username = ? AND password = ? AND isAdmin = ?";

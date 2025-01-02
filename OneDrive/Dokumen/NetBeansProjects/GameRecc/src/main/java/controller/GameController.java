@@ -28,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.review;
 import model.User;
+import java.util.Comparator;
 
 /**
  *
@@ -53,6 +54,10 @@ public class GameController  extends HttpServlet{
         }
         
         String action = request.getParameter("action");
+        if (action == null) {
+            response.getWriter().println("No action specified.");
+            return;
+        }
         
         if(action.equals("home")){
             request.getSession().setAttribute("filteredGame", null);
@@ -72,7 +77,8 @@ public class GameController  extends HttpServlet{
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
             response.sendRedirect("/views/Review.jsp");
-            
+        }else if (action.equals("admin")){
+            response.sendRedirect("/views/adminpage.jsp");
         }else if(action.equals("homeadmin")){
              response.sendRedirect("/views/homepageadmin.jsp");
         }else if(action.equals("DisplayGameEdit")) {
@@ -103,9 +109,26 @@ public class GameController  extends HttpServlet{
             } catch (SQLException ex) {
                 Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }else if ("sort".equals(action)) {
+    String sortBy = request.getParameter("by");
+    List<Game> games = (List<Game>) request.getSession().getAttribute("games");
+
+    if (games != null && !games.isEmpty()) {
+        if ("az".equals(sortBy)) {
+            games.sort(Comparator.comparing(Game::getName)); // Sorting A-Z
+        } else if ("za".equals(sortBy)) {
+            games.sort(Comparator.comparing(Game::getName).reversed()); // Sorting Z-A
+        } else if ("toprated".equals(sortBy)) {
+            games.sort(Comparator.comparingDouble(Game::getRating).reversed()); // Sorting by Rating
         }
-        
+        request.getSession().setAttribute("sortedGame", games); // Update sorted list
     }
+
+    response.sendRedirect(request.getContextPath() + "/Game?action=homepage");
+    }
+
+        
+    }   
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -122,8 +145,13 @@ public class GameController  extends HttpServlet{
             String review=request.getParameter("review");
             boolean cekReview=ReviewDao.addReview(id,user.getUserID(),rate,review);
             
-            if(cekReview){
-                response.sendRedirect("/views/homepage.jsp");
+           if (cekReview) {
+                try {
+                    gameDao.updateAllGameRatings(); // Perbarui semua rating game
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            response.sendRedirect(request.getContextPath() + "/Game?action=displaySingleGame&id=" + ID);
             }
            
      }else if(action.equals("addGame")){

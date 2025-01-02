@@ -116,6 +116,12 @@
     </div>
     <div class="right-panel">
       <h2>Sign Up</h2>
+             <% String errorMessage = (String) request.getAttribute("errorMessage");
+         if (errorMessage != null) { %>
+        <div class="error-message">
+          <%= errorMessage %>
+        </div>
+      <% } %>
       <form action="/User" method="post">
         <input type="hidden" name="action" value="register">
         <div class="mb-3">

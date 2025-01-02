@@ -97,7 +97,7 @@ public class GameDao {
         }
     }
 
-    // Method to retrieve a movie by ID
+    // Method to retrieve a game by ID
     public Game getGameById(int GameID) throws SQLException {
         String sql = "SELECT * FROM game WHERE GameID = ?";
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
@@ -119,16 +119,16 @@ public class GameDao {
                 Date Date=rs.getDate("Date");
                 String PosterGame=rs.getString("PosterGame");
                 String Deskripsi=rs.getString("Deskripsi");
-                Game game=new Game(GameID,Name,Genre,Device, Price,PosterGame, Date,Age);
+                Game game=new Game(GameID,Name,Genre,Device, Price,PosterGame, Date,Age,Rating);
                 game.setDeskripsi(Deskripsi);
                 game.setRating(Rating);
                 return (game);
             }
         }
-        return null; // Returns null if no movie is found with the given ID
+        return null; // Returns null if no game is found with the given ID
     }
 
-    // Method to retrieve all movies
+    // Method to retrieve all game
     public List<Game> getAllGame() throws SQLException {
         List<Game> game = new ArrayList<>();
         String sql = "SELECT * FROM game";
@@ -137,7 +137,7 @@ public class GameDao {
              ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                int GameID = rs.getInt("GameID");
+                    int GameID = rs.getInt("GameID");
                  
                 String Name=rs.getString("Name");
                 String Genre=rs.getString("genre");
@@ -146,7 +146,8 @@ public class GameDao {
                 int Age=rs.getInt("Age");
                 Date Date=rs.getDate("Date");
                 String PosterGame=rs.getString("PosterGame");
-                game.add(new Game(GameID,Name, Genre,Device, Price,PosterGame, Date,Age));
+                Double Rating = rs.getDouble("Rating");
+                game.add(new Game(GameID,Name, Genre,Device, Price,PosterGame, Date,Age,Rating));
                 
             }
         }
@@ -174,8 +175,9 @@ public class GameDao {
                 Date Date=rs.getDate("Date");
                 String PosterGame=rs.getString("PosterGame");
                 String Deskripsi=rs.getString("Deskripsi");
+                Double Rating = rs.getDouble("Rating");
                 
-                Game game=new Game(GameID,Name,Genre,Device, Price,PosterGame,Date,Age);
+                Game game=new Game(GameID,Name,Genre,Device, Price,PosterGame,Date,Age,Rating);
                 game.setDeskripsi(Deskripsi);
                 games.add(game);
             
@@ -213,7 +215,8 @@ public class GameDao {
                 Date Date=rs.getDate("Date");
                 String PosterGame=rs.getString("PosterGame");
                 String deskripsi=rs.getString("Deskripsi");
-                Game game=new Game(GameID,Name, Genre,Device, Price,PosterGame, Date,Age);
+                Double Rating = rs.getDouble("Rating");
+                Game game=new Game(GameID,Name, Genre,Device, Price,PosterGame, Date,Age,Rating);
                 game.setDeskripsi(deskripsi);
                 games.add(game);
                 
@@ -221,6 +224,20 @@ public class GameDao {
         }
         return games;
     }
+
+    public void updateAllGameRatings() throws SQLException { // update rating 
+    String query = "UPDATE game g " +
+                   "LEFT JOIN (" +
+                   "    SELECT Game_GameID, ROUND(AVG(Rating), 1) AS avgRating " +
+                   "    FROM review " +
+                   "    GROUP BY Game_GameID" +
+                   ") r ON g.GameID = r.Game_GameID " +
+                   "SET g.Rating = IFNULL(r.avgRating, 0)";
+    try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword);
+         PreparedStatement stmt = conn.prepareStatement(query)) {
+        stmt.executeUpdate(); // Jalankan query
+    }
+}
 
     
     
