@@ -253,15 +253,14 @@ public class GameDao {
         return games;
     }
 
-
     public List<Game> GenreSort(String genre) {
         List<Game> games = new ArrayList<>();
-    
-        String sql = "SELECT * FROM game WHERE Genre LIKE ?";
+
+        String sql = "SELECT * FROM game WHERE Genre = ?";
 
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, "%" + genre + "%"); // Use % for partial matching
+            stmt.setString(1, genre);
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
@@ -287,6 +286,91 @@ public class GameDao {
         }
 
         if (genre.isEmpty()) {
+            return null;
+        }
+
+        return games;
+    }
+
+    public List<Game> DeviceSort(String device) {
+        List<Game> games = new ArrayList<>();
+
+        String sql = "SELECT * FROM game WHERE Device = ?";
+
+        try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, device);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int GameID = rs.getInt("GameID");
+
+                String Name = rs.getString("Name");
+                String Genre = rs.getString("Genre");
+                String Device = rs.getString("Device");
+                Double Price = rs.getDouble("Price");
+                int Age = rs.getInt("Age");
+                Date Date = rs.getDate("Date");
+                String PosterGame = rs.getString("PosterGame");
+                String Deskripsi = rs.getString("Deskripsi");
+                Double Rating = rs.getDouble("Rating");
+
+                Game game = new Game(GameID, Name, Genre, Device, Price, PosterGame, Date, Age, Rating);
+                game.setDeskripsi(Deskripsi);
+                games.add(game);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (device.isEmpty()) {
+            return null;
+        }
+
+        return games;
+    }
+
+    public List<Game> PriceSort(String harga) {
+        List<Game> games = new ArrayList<>();
+        
+        String sql = null;
+        if (harga.equals("Free")){
+            sql = "SELECT * FROM game WHERE Price = 0";
+        }else if (harga.equals("Above100")) {
+            sql = "SELECT * FROM game WHERE Price > 100000";
+        }else if (harga.equals("Under100")) {
+            sql = "SELECT * FROM game WHERE Price > 0 AND Price <= 100000";
+        }
+
+
+        try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                int GameID = rs.getInt("GameID");
+
+                String Name = rs.getString("Name");
+                String Genre = rs.getString("Genre");
+                String Device = rs.getString("Device");
+                Double Price = rs.getDouble("Price");
+                int Age = rs.getInt("Age");
+                Date Date = rs.getDate("Date");
+                String PosterGame = rs.getString("PosterGame");
+                String Deskripsi = rs.getString("Deskripsi");
+                Double Rating = rs.getDouble("Rating");
+
+                Game game = new Game(GameID, Name, Genre, Device, Price, PosterGame, Date, Age, Rating);
+                game.setDeskripsi(Deskripsi);
+                games.add(game);
+
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        if (harga.isEmpty()) {
             return null;
         }
 

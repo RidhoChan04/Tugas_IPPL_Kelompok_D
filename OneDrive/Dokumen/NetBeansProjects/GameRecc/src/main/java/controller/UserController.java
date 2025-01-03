@@ -66,9 +66,9 @@ public class UserController extends HttpServlet{
             request.getSession().setAttribute("user", user);
             handleLogin(request,response);
         }else if (action.equals("logout")){
-            HttpSession sesi = request.getSession();
             request.getSession().invalidate();
-            response.sendRedirect("/views/login.jsp");
+            request.setAttribute("errorMessage", "Telah berhasil logout, silahkan login kembali");
+            request.getRequestDispatcher("/views/login.jsp").forward(request, response);
         }
         
         

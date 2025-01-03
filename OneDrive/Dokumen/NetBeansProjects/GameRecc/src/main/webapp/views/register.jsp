@@ -134,7 +134,6 @@
       </form>
 
       <div class="text-center mt-3">
-        <p>Not admin yet? <a href="/request-access">Request Access</a></p>
         <p>Existing User? <a href="/login">Sign In</a></p>
       </div>
     </div>

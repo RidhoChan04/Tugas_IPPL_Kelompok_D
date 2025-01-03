@@ -1,201 +1,140 @@
 <%-- 
-    Document   : homepageadmin
-    Created on : 22 Nov 2024, 01.18.34
+    Document   : homepage
+    Created on : 20 Nov 2024, 20.17.47
     Author     : Victus
+    ok
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="model.Game"%>
+<%@page import="model.review"%>
+<%@page import="model.User"%>
 <%@page import="java.util.List"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GameRecce - Sorting Games</title>
+  <title>GameRecc</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      padding: 0;
       font-family: Arial, sans-serif;
       background-color: #002b40;
-      background-image: url('\gambar\Group_8.png'); 
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-position: center;
       color: white;
+      margin: 0;
+      padding: 0;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: flex-start;
       min-height: 100vh;
     }
-
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 90%;
-      max-width: 1200px;
-      padding: 20px 0;
-      border-bottom: 2px solid #749aa8;
-    }
-
-    .header .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .header h2 {
-      font-size: 1.8rem;
-      font-weight: bold;
-      color: #8bc8bd;
-      margin: 0;
-    }
-
-    /* Search button container */
-    .search-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .search {
-      background-color: #ffffff00;
-      width: 50px;
-      height: 45px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .search img {
-      width: 45px;
-      height: 45px;
-    }
-
-    /* Search input (initially hidden) */
-    .search-input {
-      display: none;
-      width: 0;
-      padding: 0;
-      border: none;
-      background-color: transparent;
-      color: white;
-      font-size: 16px;
-      transition: width 0.4s ease;
-      outline: none;
-    }
-
-    /* Display search input when search button is clicked */
-    .search-container.active .search-input {
-      display: inline-block;
-      width: 200px;
-      border-bottom: 2px solid #8bc8bd;
-    }
-
+    
     .main-content {
-      width: 90%;
-      max-width: 1200px;
-      margin-top: 30px;
-      flex-grow: 1;
+      margin-left: 20px;
+      flex: 1;
+      padding: 2rem 0;
+      background-color: #002b40;
     }
-
-    .sort-button {
-      background-color: #28a745;
-      color: white;
-      padding: 12px 25px;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 1rem;
-      font-weight: bold;
-      transition: background-color 0.3s ease, transform 0.2s ease;
-      display: inline-block;
-      margin-bottom: 20px;
-    }
-
-    .sort-button:hover {
-      background-color: #218838;
-      transform: translateY(-2px);
-    }
-
+    
     .game-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.5rem;
+      padding: 0 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
     }
-
+    
     .game-card {
-      background-color: #1c3b4d;
-      border-radius: 10px;
+      background-color: #00334d;
+      border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      text-align: center;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
-
+    
     .game-card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
     }
-
+    
     .game-card img {
       width: 100%;
-      height: 160px;
+      height: 250px;
       object-fit: cover;
     }
-
+    
     .game-card-title {
-      padding: 15px;
-      font-size: 1.1rem;
+      padding: 0.75rem;
       font-weight: bold;
-      color: white;
-    }
-
-    footer {
-      margin-top: 20px;
-      padding: 10px;
       text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-decoration: none !important;
+      color: white !important;
+    }
+    
+    footer {
       background-color: #00334d;
-      width: 100%;
       color: white;
-      font-size: 0.9rem;
-      border-top: 2px solid #749aa8;
+      text-align: center;
+      padding: 10px;
+      margin-top: auto;
     }
 
-    footer a {
-      color: #8bc8bd;
+    a {
       text-decoration: none;
+      color: white;
     }
 
-    footer a:hover {
-      text-decoration: underline;
+    .no-games {
+      text-align: center;
+      font-size: 1.2rem;
+      margin-top: 2rem;
+    }
+    .btn {
+      border-radius: 10px;
+      padding: 5px 15px;
+      background-color: #8bc8bd;
+      color: #00334d;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #6fa89c;
+      color: white;
     }
   </style>
 </head>
 <body>
-    <%  List<Game>games=(List<Game>)request.getSession().getAttribute("games");   %>
-  <div class="header">
-    <div class="logo">
-      <img src="/gambar/logo_gamerec.png" alt="GameRecce Logo">
-      <h2>GameRecce</h2>
-    </div>
-    <div class="search">
-      <img src="/gambar/search.png" alt="Search Icon">
-    </div>
-  </div>
+  <%@ include file="navbar.jsp" %>
+  <%  
+    List<Game> games = (List<Game>)request.getSession().getAttribute("games");   
+    List<Game> filteredGame = (List<Game>)request.getSession().getAttribute("filteredGame");
+    List<Game> sortedGame = (List<Game>)request.getSession().getAttribute("sortedGame");
+    List<Game> displayGame = new ArrayList<>();
+    if (games == null || games.isEmpty()) {
+        games = (List<Game>) request.getSession().getAttribute("games");
+    }
+    if (filteredGame != null) {
+      displayGame = filteredGame;
+      if (sortedGame != null) {
+        displayGame = sortedGame;
+      }  
+    } else {
+      displayGame = games;   
+      if (sortedGame != null) {
+        displayGame = sortedGame;
+      }
+    }
+  %>
   <div class="main-content">
-    <button class="sort-button">Sorting Game</button>
-    <button onclick="window.location.href='/views/adminpage.jsp'">Home</button>
+    <button class="btn btn-success" onclick="window.location.href='/views/adminpage.jsp'">Home</button>
     <div class="game-grid">
          <% if (!games.isEmpty()) { %>
     <% for (Game game : games) { %>
-    <a href="/Game?action=DisplayGameEdit&id=<%=game.getGameID()%>" >  
+    <a href="/Game?action=DisplayGameEdit&id=<%=game.getGameID()%>" style="text-decoration: none;" >  
     <div class="game-card">
           <img src="${pageContext.request.contextPath}/<%= game.getPosterGame() %>" alt="Game Image">
           <div class="game-card-title"><%=game.getName()%></div>
@@ -205,13 +144,12 @@
 <% } else { %>
     <p>No games available to display.</p>
 <% } %>
-      
-      
- 
     </div>
   </div>
-  <footer>
-    &copy; 2024 GameRecce. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a>
+  <footer class="text-center p-3">
+    &copy; 2024 GameRecc. All rights reserved.
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

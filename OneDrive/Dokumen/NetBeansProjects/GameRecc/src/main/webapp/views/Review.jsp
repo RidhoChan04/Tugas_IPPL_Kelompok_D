@@ -28,8 +28,8 @@
         .details-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 3rem;
-            margin-top: 2rem;
+            gap: 2rem;
+            margin-top: 1.5rem;
         }
 
         .detail-item {
@@ -95,6 +95,18 @@
             height: 500px; 
             overflow: hidden; 
         }
+       .btn {
+            border-radius: 10px;
+            padding: 5px 15px;
+            background-color: #8bc8bd;
+            color: #00334d;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+          }
+        .btn:hover {
+            background-color: #6fa89c;
+            color: white;
+          }
     </style>
 </head>
 <body>
@@ -144,21 +156,22 @@
                               <span class="text-light"><%= game.getDate() %></span>
                           </div>
                       </div>
+                       <div class="card mb-4">
+                        <div class="card-body">
+                          <h5 class="card-title">Deskripsi</h5>
+                            <div class="card mb-3">
+                              <div class="card-body">
+                                <p class="card-text"><%= game.getDeskripsi() %></p>
+                              </div> 
+                            </div>
+                        </div>
+                      </div>
                   </div>
               </div>
           </div>
       </div>      
 
-        <div class="card mb-4">
-          <div class="card-body">
-            <h5 class="card-title">Deskripsi</h5>
-              <div class="card mb-3">
-                <div class="card-body">
-                  <p class="card-text"><%= game.getDeskripsi() %></p>
-                </div> 
-              </div>
-          </div>
-        </div>
+       
 
         <div class="card mb-4">
             <div class="card-body">
@@ -198,7 +211,7 @@
                                    min="0" max="5" step="0.1" required>
                         </div>
                         
-                        <button type="submit" class="btn btn-primary">Submit Review</button>
+                        <button type="submit" class="btn btn-success">Submit Review</button>
                     </form>
                 </div>
             </div>

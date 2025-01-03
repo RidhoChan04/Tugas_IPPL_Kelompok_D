@@ -96,6 +96,28 @@
     .navbar-dropdown:hover .navbar-dropdown-content {
       display: block;
     }
+
+    /* Nested Dropdown */
+    .nested-dropdown {
+      position: relative;
+    }
+    .nested-dropdown-content {
+      display: none;
+      position: absolute;
+      left: 200px;
+      top: 0;
+      background-color: #005c73;
+      border-radius: 10px;
+      z-index: 2;
+    }
+    .nested-dropdown:hover .nested-dropdown-content {
+      display: block;
+    }
+    .nested-dropdown-content a {
+      padding: 10px 20px;
+      display: block;
+    }
+
     /* Sorting Dropdown */
     .sorting-dropdown {
       position: relative;
@@ -124,12 +146,12 @@
     .sorting-dropdown:hover .sorting-dropdown-content {
       display: block;
     }
+
     /* Profile Icon */
     .profile-icon {
       display: flex;
       align-items: center;
       gap: 10px;
-      cursor: pointer;
     }
     .profile-icon img {
       height: 40px;
@@ -169,18 +191,37 @@
   </form>
 
   <div class="navbar-dropdown">
-    <button class="btn btn-outline-light">Categories</button>
+    <button class="btn">Kategori</button>
     <div class="navbar-dropdown-content">
-      <a href="/Game?action=Action">Action</a>
-      <a href="/Game?action=Adventure">Adventure</a>
-      <a href="/Game?action=RPG">RPG</a>
-      <a href="/Game?action=Strategy">Strategy</a>
-      <a href="/Game?action=Sports">Sports</a>
+      <div class="nested-dropdown">
+        <a href="#">Tipe Genre</a>
+        <div class="nested-dropdown-content">
+          <a name="genre" href="/Game?action=Genre&genre=Action">Action</a>
+          <a name="genre" href="/Game?action=Genre&genre=Adventure">Adventure</a>
+          <a name="genre" href="/Game?action=Genre&genre=RPG">RPG</a>
+        </div>
+      </div>
+      <div class="nested-dropdown">
+        <a href="#">Tipe Device</a>
+        <div class="nested-dropdown-content">
+          <a name="device" href="/Game?action=Device&device=PC">PC</a>
+          <a name="device" href="/Game?action=Device&device=Console">Console</a>
+          <a name="device" href="/Game?action=Device&device=Mobile">Mobile</a>
+        </div>
+      </div>
+      <div class="nested-dropdown">
+        <a href="#">Harga</a>
+        <div class="nested-dropdown-content">
+          <a name="harga" href="/Game?action=Harga&harga=Free">Free</a>
+          <a name="harga" href="/Game?action=Harga&harga=Under100">Under 100k</a>
+          <a name="harga" href="/Game?action=Harga&harga=Above100">Above 100k</a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="sorting-dropdown">
-    <button class="btn btn-outline-light">Sort</button>
+   <div class="sorting-dropdown">
+    <button class="btn">Sort</button>
     <div class="sorting-dropdown-content">
       <a href="/Game?action=sortAZ">A-Z</a>
       <a href="/Game?action=sortZA">Z-A</a>
@@ -190,15 +231,12 @@
 
   <div class="profile-icon">
     <img src="/gambar/profile_user.png" alt="User Profile">
-    <span>User</span>
     <form action="/User" method="post" class="d-flex">
     <input type="hidden" name="action" value="logout">
     <button type="submit" class="btn btn-danger btn-sm">Logout</button>
     </form>
   </div>
 </div>
-    
-
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

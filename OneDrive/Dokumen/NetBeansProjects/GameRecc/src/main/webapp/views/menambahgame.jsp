@@ -17,7 +17,8 @@
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background:url("bckground_figma.jpg");
+      background-color: #002b40;
+      background-image:url('\gambar\bckground_figma.jpg');
       background-size: cover;
       color: white;
       display: flex;
@@ -184,7 +185,7 @@
     </div>
   </div>
 
-  <a href="/admin-menu" class="back-button">&#8630;</a>
+  <a href="/views/adminpage.jsp" class="back-button">&#8630;</a>
 
   
 </body>

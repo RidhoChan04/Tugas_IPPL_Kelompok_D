@@ -70,7 +70,8 @@
       text-align: center;
       white-space: nowrap;
       overflow: hidden;
-      text-overflow: ellipsis;
+      text-decoration: none !important;
+      color: white !important;
     }
     
     footer {
@@ -119,12 +120,12 @@
   <div class="game-grid">
     <% if (displayGame != null && !displayGame.isEmpty()) { %>
       <% for (Game game : displayGame) { %>
-        <a href="/Game?action=displaySingleGame&id=<%=game.getGameID()%>">  
+        <a href="/Game?action=displaySingleGame&id=<%=game.getGameID()%>" style="text-decoration: none;">  
           <div class="game-card">
             <img src="<%= request.getContextPath() %>/<%= game.getPosterGame() %>" alt="Game Image">
             <div class="game-card-title"><%= game.getName() %></div>
-            <p class="text-center">Genre: <%= game.getGenre() %></p>
-            <p class="text-center">Rating: <%= game.getRating() %> ★</p>
+            <p class="text-center" style="color: white;">Genre: <%= game.getGenre() %></p>
+            <p class="text-center" style="color: white;">Rating: <%= game.getRating() %> ★</p>
           </div>
         </a>
       <% } %>

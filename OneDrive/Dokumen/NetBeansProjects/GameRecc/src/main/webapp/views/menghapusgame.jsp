@@ -171,7 +171,7 @@
     </div>
   </div>
 
-  <a href="/admin-menu" class="back-button">&#8630;</a>
+  <a href="/views/adminpage.jsp" class="back-button">&#8630;</a>
 
   
 </body>
