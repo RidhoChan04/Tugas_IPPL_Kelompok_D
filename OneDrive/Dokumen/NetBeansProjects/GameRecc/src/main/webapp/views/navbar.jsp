@@ -190,7 +190,7 @@
 
   <div class="profile-icon">
     <img src="/gambar/profile_user.png" alt="User Profile">
-    <span>User</span>1
+    <span>User</span>
     <form action="/User" method="post" class="d-flex">
     <input type="hidden" name="action" value="logout">
     <button type="submit" class="btn btn-danger btn-sm">Logout</button>
