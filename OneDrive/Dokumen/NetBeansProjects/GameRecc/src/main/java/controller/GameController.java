@@ -236,7 +236,7 @@ public class GameController extends HttpServlet {
         }
         if (gameAdded) {
 
-            response.sendRedirect("/Game?action=home"); // Refresh the movie list
+            response.sendRedirect("/Game?action=home"); 
 
         } else {
 
@@ -256,7 +256,7 @@ public class GameController extends HttpServlet {
             Logger.getLogger(GameController.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (DeletGame) {
-            response.sendRedirect("/Game?action=home"); // Refresh the movie list 
+            response.sendRedirect("/Game?action=home"); 
         } else {
             request.setAttribute("errorM", "Game Tersebut Tidak Ditemukan");
             request.getRequestDispatcher("/views/menghapusgame.jsp").forward(request, response);
@@ -312,7 +312,7 @@ public class GameController extends HttpServlet {
         }
         if (ubahGame) {
 
-            response.sendRedirect("/Game?action=homeadmin"); // Refresh the movie list
+            response.sendRedirect("/Game?action=homeadmin"); 
 
         } else {
             response.getWriter().print(id);

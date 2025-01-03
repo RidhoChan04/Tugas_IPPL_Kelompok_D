@@ -31,7 +31,6 @@ public class GameDao {
     private final String dbUser = "root";
     private final String dbPassword = "zaidan";
 
-    // Method to add a new movie
     public boolean addGame(String name, String genre, String device, double Price, int age, double rating, java.util.Date Date, String PosterGame, String Deskripsi) throws SQLException {
         String sql = "INSERT INTO game (Name, Genre , Device ,Price ,Age,Rating,Date,PosterGame,Deskripsi) VALUES (?,?,?,?,?,?,?,?,?)";
         try {
@@ -76,7 +75,6 @@ public class GameDao {
         }
     }
 
-    // Method to delete a movie by ID
     public boolean deleteGame(String name, String genre) throws SQLException {
         String sql = "DELETE FROM game WHERE Name=? and Genre=?";
         try (Connection conn = DriverManager.getConnection(url, dbUser, dbPassword); PreparedStatement stmt = conn.prepareStatement(sql)) {

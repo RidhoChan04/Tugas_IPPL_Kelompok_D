@@ -40,7 +40,6 @@ public class ReviewDao {
         }
     }
 
-    // Method to retrieve reviews for a specific movie
     public List<review> getReviewsByGameID(int GameID) {
         List<review> reviews = new ArrayList<>();
         String query = "SELECT * FROM review WHERE Game_GameID = ? ORDER BY Rating DESC";
